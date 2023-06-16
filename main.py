@@ -1,33 +1,31 @@
-import time
 from time import sleep
 import RPi.GPIO as GPIO
-#from config import *
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+
+#We *might* need time, in case we don't want to use crontab
+#import time
+
+#I don't think I need any of these, I'm just using a stepper
+#from config import *
 #import gpiozero
 #from gpiozero import Servo
 #from gpiozero.pins.pigpio import PiGPIOFactory
 #gpiozero.Device.pin_factory=PiGPIOFactory('127.0.0.1')
 #servo = Servo(25)
 
+#Stepper motor GPIO pins
 MOTOR_A_1           = 12
 MOTOR_A_2           = 20
 MOTOR_B_1           = 16
 MOTOR_B_2           = 21
 
+# Set pin states
 def setup():
-    # Set pin states
     GPIO.setup(MOTOR_A_1, GPIO.OUT)
     GPIO.setup(MOTOR_A_2, GPIO.OUT)
     GPIO.setup(MOTOR_B_1, GPIO.OUT)
     GPIO.setup(MOTOR_B_2, GPIO.OUT)
- 
-def servin_time():
-    servo.mid()
-    sleep(0.5)
-    servo.max()
-    sleep(0.5)
-    return
  
 # Function for step sequence
 def setStep(w1, w2, w3, w4):
@@ -63,6 +61,7 @@ def cclockwise(steps,delay):
         time.sleep(delay)
     return
 
+# FIXME Do somehting about this, because Python is not handling the shebang operator for boolean values
 # Rotate clockwise or counterclockwise based off boolean value 
 #def rotate(direction,steps,delay):
 #    for i in range(0, steps):
@@ -76,18 +75,20 @@ def cclockwise(steps,delay):
 #        time.sleep(delay)
 #    return
 
-if __name__ == '__main__':     # Program start from here
+# Program start from here
+if __name__ == '__main__':     
     try:
+        # Setup inputs/outputs
         setup()
         #print("Fuji feeding time! Fuji will be fed.")
 
         delay = 0.0028
-        clicks = 100
+        clicks = 100 # TODO Decrease value?
 
-        sleep(1)
+        sleep(3)
         clockwise(clicks, delay)
         cclockwise(clicks, delay)
-        sleep(1)
+        sleep(3)
         
         #Feeding time verification
         #print("Fuji has been fed.")
