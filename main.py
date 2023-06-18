@@ -15,9 +15,9 @@ GPIO.setwarnings(False)
 #servo = Servo(25)
 
 #Stepper motor GPIO pins
-MOTOR_A_1           = 12
-MOTOR_A_2           = 20
-MOTOR_B_1           = 16
+MOTOR_A_1           = 19
+MOTOR_A_2           = 29
+MOTOR_B_1           = 20
 MOTOR_B_2           = 21
 
 # Set pin states
